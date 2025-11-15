@@ -1,0 +1,114 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.about {
+  padding: $spacing-2xl $spacing-md;
+  max-width: 1200px;
+  margin: 0 auto;
+  direction: rtl; // Right-to-left for Hebrew
+
+  @include breakpoint(lg) {
+    padding: $spacing-2xl $spacing-lg;
+  }
+}
+
+.title {
+  font-family: $font-secondary;
+  font-size: $fs-4xl;
+  font-weight: 400;
+  margin-bottom: $spacing-2xl;
+  color: $text-dark;
+  letter-spacing: 2px;
+  line-height: 1.3;
+  text-align: center;
+
+  @include breakpoint(lg) {
+    font-size: 3.5rem;
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+.tabsContainer {
+  background-color: $secondary-color;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid $border-color;
+  background-color: $bg-off-white;
+
+  @include breakpoint(lg) {
+    flex-wrap: nowrap;
+  }
+}
+
+.tab {
+  @include button-reset;
+  flex: 1;
+  min-width: 50%;
+  padding: 0;
+  font-size: $fs-sm;
+  font-weight: 400;
+  color: $text-light;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all $transition-base;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include breakpoint(lg) {
+    flex: 1;
+    min-width: auto;
+    font-size: $fs-base;
+  }
+
+  &:hover {
+    color: $text-dark;
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  &.tabActive {
+    color: $primary-color;
+    border-bottom-color: $primary-color;
+    font-weight: 500;
+    background-color: $secondary-color;
+  }
+}
+
+.tabContent {
+  padding: $spacing-2xl $spacing-md;
+  min-height: 300px;
+
+  @include breakpoint(lg) {
+    padding: $spacing-2xl $spacing-2xl;
+  }
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.paragraph {
+  font-size: $fs-lg;
+  line-height: 1.9;
+  color: $text-dark;
+  margin-bottom: $spacing-md;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+
+  @include breakpoint(lg) {
+    font-size: $fs-xl;
+    margin-bottom: $spacing-lg;
+  }
+}
+
