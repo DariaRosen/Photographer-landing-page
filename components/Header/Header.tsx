@@ -13,6 +13,8 @@ interface HeaderProps {
 const defaultNavigation: NavigationItem[] = [
   { label: 'צור קשר', href: '/contact' },
   { label: 'לקוחות ממליצים', href: '/testimonials' },
+  { label: 'מחירון', href: '/pricing' },
+  { label: 'הדפסות', href: '/prints' },
   { label: 'בלוג', href: '/blog' },
   { label: 'מה עיבוד עושה לתמונה', href: '/editing' },
   { label: 'גלריה', href: '/gallery' },
