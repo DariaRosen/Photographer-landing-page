@@ -20,7 +20,7 @@
   justify-content: center;
 
   @include breakpoint(lg) {
-    height: 600px;
+    height: 400px;
   }
 }
 
@@ -31,11 +31,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: $spacing-md;
+
   perspective: 1200px;
 
   @include breakpoint(lg) {
-    gap: $spacing-lg;
   }
 }
 
@@ -61,7 +60,7 @@
     transform: scale(0.65);
     
     @include breakpoint(lg) {
-      height: 240px;
+      height: 120px;
       width: 160px;
     }
   }
@@ -74,22 +73,22 @@
     transform: scale(0.8);
     
     @include breakpoint(lg) {
-      height: 320px;
+      height: 150px;
       width: 200px;
     }
   }
   
   // Center card - largest
   &.slideCenter {
-    height: 400px;
-    width: 280px;
+    height: 450px;
+    width: 320px;
     opacity: 1;
     transform: scale(1);
     z-index: 10;
     
     @include breakpoint(lg) {
-      height: 550px;
-      width: 380px;
+      height: 330px;
+      width: 450px;
     }
   }
 }
