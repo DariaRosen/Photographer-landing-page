@@ -135,7 +135,7 @@ export const Carousel = ({ images, autoPlayInterval = 4000 }: CarouselProps) => 
             
             return (
               <div
-                key={`position-${position}-image-${imageIndex}`}
+                key={`position-${position}-image-${imageIndex}-${currentIndex}`}
                 className={`${styles.carouselSlide} ${
                   isCenter ? styles.slideCenter : ''
                 } ${isEdge ? styles.slideEdge : ''} ${isSide ? styles.slideSide : ''}`}
