@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import styles from './carousel.module.scss'
 
 interface CarouselImage {
@@ -13,20 +13,51 @@ interface CarouselProps {
   autoPlayInterval?: number
 }
 
+const VISIBLE = 5 // Show 5 cards at a time
+
 export const Carousel = ({ images, autoPlayInterval = 4000 }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [step, setStep] = useState(0)
+  const [cardWidth, setCardWidth] = useState(0)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const carouselRef = useRef<HTMLDivElement>(null)
+
+  const measureStep = useCallback(() => {
+    const el = carouselRef.current
+    const track = trackRef.current
+    if (!el || !track) return
+
+    // Calculate based on center card width (largest card)
+    // Center card: 450px on desktop, 320px on mobile
+    const centerCardWidth = el.clientWidth > 1024 ? 450 : 320
+    const gap = 0 // No gap in our design
+    const calculatedStep = Math.round(centerCardWidth + gap)
+    
+    setCardWidth(centerCardWidth)
+    setStep(calculatedStep)
+    
+    const maxStart = Math.max(0, images.length - VISIBLE)
+    setCurrentIndex((prev) => Math.min(prev, maxStart))
+  }, [images.length])
+
+  useEffect(() => {
+    measureStep()
+    window.addEventListener('resize', measureStep)
+    return () => window.removeEventListener('resize', measureStep)
+  }, [measureStep])
 
   const goToNext = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+    setCurrentIndex((prev) => Math.min(prev + 1, Math.max(0, images.length - VISIBLE)))
   }, [images.length])
 
   const goToPrevious = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
-  }, [images.length])
+    setCurrentIndex((prev) => Math.max(prev - 1, 0))
+  }, [])
 
   const goToSlide = (index: number) => {
-    setCurrentIndex(index)
+    const maxStart = Math.max(0, images.length - VISIBLE)
+    setCurrentIndex(Math.min(index, maxStart))
   }
 
   // Auto-play functionality
@@ -48,26 +79,8 @@ export const Carousel = ({ images, autoPlayInterval = 4000 }: CarouselProps) => 
     return null
   }
 
-  // Calculate which 5 cards to show (2 before, current, 2 after)
-  const getVisibleCards = () => {
-    const visible: number[] = []
-    for (let i = -2; i <= 2; i++) {
-      let index = currentIndex + i
-      // Wrap around for circular carousel
-      if (index < 0) {
-        index = images.length + index
-      } else if (index >= images.length) {
-        index = index - images.length
-      }
-      visible.push(index)
-    }
-    return visible
-  }
-
-  const visibleCards = getVisibleCards()
-
-  // Calculate offset to center the current card
-  const offset = 2 // Show 2 cards before center
+  const translateX = -(currentIndex * step)
+  const showArrows = images.length > VISIBLE
 
   return (
     <div
@@ -75,24 +88,32 @@ export const Carousel = ({ images, autoPlayInterval = 4000 }: CarouselProps) => 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={styles.carouselContainer}>
-        <div className={styles.carouselTrack}>
-          {visibleCards.map((imageIndex, position) => {
-            const isCenter = position === 2 // 5th card (index 2) is center
-            const distanceFromCenter = Math.abs(position - 2)
+      <div className={styles.carouselContainer} ref={carouselRef}>
+        <div
+          ref={trackRef}
+          className={styles.carouselTrack}
+          style={{ transform: `translateX(${translateX}px)` }}
+        >
+          {images.map((image, index) => {
+            // Calculate position relative to center (which is at currentIndex + 2)
+            const relativePosition = index - (currentIndex + 2)
+            
+            // Determine card type based on position relative to center
+            const isCenter = relativePosition === 0
+            const distanceFromCenter = Math.abs(relativePosition)
             
             return (
               <div
-                key={`${imageIndex}-${position}`}
+                key={index}
                 className={`${styles.carouselSlide} ${
                   isCenter ? styles.slideCenter : ''
-                } ${distanceFromCenter === 2 ? styles.slideEdge : styles.slideSide}`}
+                } ${distanceFromCenter === 2 ? styles.slideEdge : distanceFromCenter === 1 ? styles.slideSide : ''}`}
               >
                 <img
-                  src={images[imageIndex].src}
-                  alt={images[imageIndex].alt}
+                  src={image.src}
+                  alt={image.alt}
                   className={styles.carouselImage}
-                  loading={isCenter ? 'eager' : 'lazy'}
+                  loading={isCenter && index < 3 ? 'eager' : 'lazy'}
                 />
               </div>
             )
@@ -100,51 +121,57 @@ export const Carousel = ({ images, autoPlayInterval = 4000 }: CarouselProps) => 
         </div>
       </div>
 
-      <button
-        className={styles.carouselButton}
-        onClick={goToPrevious}
-        aria-label="Previous image"
-        type="button"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+      {showArrows && (
+        <button
+          className={styles.carouselButton}
+          onClick={goToPrevious}
+          disabled={currentIndex === 0}
+          aria-label="Previous image"
+          type="button"
         >
-          <path
-            d="M15 18L9 12L15 6"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 18L9 12L15 6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      )}
 
-      <button
-        className={`${styles.carouselButton} ${styles.carouselButtonRight}`}
-        onClick={goToNext}
-        aria-label="Next image"
-        type="button"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+      {showArrows && (
+        <button
+          className={`${styles.carouselButton} ${styles.carouselButtonRight}`}
+          onClick={goToNext}
+          disabled={currentIndex >= images.length - VISIBLE}
+          aria-label="Next image"
+          type="button"
         >
-          <path
-            d="M9 18L15 12L9 6"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9 18L15 12L9 6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      )}
 
       <div className={styles.carouselIndicators}>
         {images.map((_, index) => (
