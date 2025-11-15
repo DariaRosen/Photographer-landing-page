@@ -48,6 +48,27 @@ export const Carousel = ({ images, autoPlayInterval = 4000 }: CarouselProps) => 
     return null
   }
 
+  // Calculate which 5 cards to show (2 before, current, 2 after)
+  const getVisibleCards = () => {
+    const visible: number[] = []
+    for (let i = -2; i <= 2; i++) {
+      let index = currentIndex + i
+      // Wrap around for circular carousel
+      if (index < 0) {
+        index = images.length + index
+      } else if (index >= images.length) {
+        index = index - images.length
+      }
+      visible.push(index)
+    }
+    return visible
+  }
+
+  const visibleCards = getVisibleCards()
+
+  // Calculate offset to center the current card
+  const offset = 2 // Show 2 cards before center
+
   return (
     <div
       className={styles.carousel}
@@ -55,22 +76,27 @@ export const Carousel = ({ images, autoPlayInterval = 4000 }: CarouselProps) => 
       onMouseLeave={handleMouseLeave}
     >
       <div className={styles.carouselContainer}>
-        <div
-          className={styles.carouselTrack}
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-          }}
-        >
-          {images.map((image, index) => (
-            <div key={index} className={styles.carouselSlide}>
-              <img
-                src={image.src}
-                alt={image.alt}
-                className={styles.carouselImage}
-                loading={index === 0 ? 'eager' : 'lazy'}
-              />
-            </div>
-          ))}
+        <div className={styles.carouselTrack}>
+          {visibleCards.map((imageIndex, position) => {
+            const isCenter = position === 2 // 5th card (index 2) is center
+            const distanceFromCenter = Math.abs(position - 2)
+            
+            return (
+              <div
+                key={`${imageIndex}-${position}`}
+                className={`${styles.carouselSlide} ${
+                  isCenter ? styles.slideCenter : ''
+                } ${distanceFromCenter === 2 ? styles.slideEdge : styles.slideSide}`}
+              >
+                <img
+                  src={images[imageIndex].src}
+                  alt={images[imageIndex].alt}
+                  className={styles.carouselImage}
+                  loading={isCenter ? 'eager' : 'lazy'}
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
 
