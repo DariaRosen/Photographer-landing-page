@@ -11,6 +11,7 @@
   backdrop-filter: blur(10px);
   border-bottom: 1px solid $border-color;
   transition: all $transition-base;
+  overflow: visible;
 
   &.scrolled {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
@@ -20,10 +21,11 @@
 .container {
   @include container;
   @include flex-between;
-  height: 90px;
+  height: 140px;
+  align-items: center;
 
   @include breakpoint(lg) {
-    height: 100px;
+    height: 140px;
   }
 }
 
@@ -32,11 +34,8 @@
   align-items: center;
   text-decoration: none;
   transition: opacity $transition-fast;
-  height: 50px;
-
-  @include breakpoint(lg) {
-    height: 60px;
-  }
+  height: 120px;
+  overflow: visible;
 
   &:hover {
     opacity: 0.8;
@@ -46,18 +45,22 @@
 .logoImage {
   height: 120px;
   width: 120px;
-  
   object-fit: contain;
   display: block;
+  /* Allow logo to overflow header */
+  position: relative;
+  z-index: 10;
 }
 
 .nav {
   display: none;
+  flex: 1;
 
   @include breakpoint(md) {
     display: flex;
     align-items: center;
-    gap: $spacing-xl;
+    gap: $spacing-lg;
+    justify-content: flex-start;
   }
 }
 
@@ -135,7 +138,7 @@
 
 .mobileMenu {
   position: fixed;
-  top: 90px;
+  top: 140px;
   left: 0;
   right: 0;
   bottom: 0;

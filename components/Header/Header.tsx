@@ -11,10 +11,13 @@ interface HeaderProps {
 }
 
 const defaultNavigation: NavigationItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Portfolio', href: '/portfolio' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'צור קשר', href: '/contact' },
+  { label: 'לקוחות ממליצים', href: '/testimonials' },
+  { label: 'בלוג', href: '/blog' },
+  { label: 'מה עיבוד עושה לתמונה', href: '/editing' },
+  { label: 'גלריה', href: '/gallery' },
+  { label: 'הסיפור שלי', href: '/about' },
+  { label: 'בית', href: '/' },
 ]
 
 export const Header = ({ navigation = defaultNavigation }: HeaderProps) => {
@@ -42,6 +45,20 @@ export const Header = ({ navigation = defaultNavigation }: HeaderProps) => {
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
+        <nav className={styles.nav}>
+          {navigation.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`${styles.navItem} ${
+                pathname === item.href ? styles.active : ''
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
         <Link href="/" className={styles.logo}>
           <img 
             src="/logo.jpg" 
@@ -57,20 +74,6 @@ export const Header = ({ navigation = defaultNavigation }: HeaderProps) => {
             onLoad={() => console.log('Logo loaded successfully from /logo.jpg')}
           />
         </Link>
-
-        <nav className={styles.nav}>
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`${styles.navItem} ${
-                pathname === item.href ? styles.active : ''
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
 
         <button
           className={`${styles.mobileMenuButton} ${
@@ -107,4 +110,3 @@ export const Header = ({ navigation = defaultNavigation }: HeaderProps) => {
     </header>
   )
 }
-
