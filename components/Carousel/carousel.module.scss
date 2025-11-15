@@ -99,17 +99,44 @@
   object-fit: cover;
   object-position: center;
   display: block;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: box-shadow $transition-base;
+  
+  // Classic photo frame effect
+  border: 8px solid $secondary-color;
+  border-bottom-width: 20px;
+  border-top-width: 8px;
+  border-left-width: 8px;
+  border-right-width: 8px;
+  box-shadow: 
+    0 0 0 2px rgba(0, 0, 0, 0.1),
+    0 0 0 4px rgba(0, 0, 0, 0.05),
+    inset 0 0 20px rgba(0, 0, 0, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: all $transition-base;
+  background-color: $secondary-color;
+  
+  @include breakpoint(lg) {
+    border: 12px solid $secondary-color;
+    border-bottom-width: 30px;
+    border-top-width: 12px;
+    border-left-width: 12px;
+    border-right-width: 12px;
+  }
 }
 
 .carouselSlide:hover .carouselImage {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 
+    0 0 0 2px rgba(0, 0, 0, 0.15),
+    0 0 0 4px rgba(0, 0, 0, 0.08),
+    inset 0 0 20px rgba(0, 0, 0, 0.15),
+    0 12px 32px rgba(0, 0, 0, 0.3);
 }
 
 .carouselSlide.slideCenter .carouselImage {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 0 0 3px rgba(0, 0, 0, 0.1),
+    0 0 0 6px rgba(0, 0, 0, 0.05),
+    inset 0 0 30px rgba(0, 0, 0, 0.1),
+    0 12px 32px rgba(0, 0, 0, 0.25);
 }
 
 .carouselButton {
