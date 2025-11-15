@@ -15,8 +15,6 @@ const defaultNavigation: NavigationItem[] = [
   { label: 'לקוחות ממליצים', href: '/testimonials' },
   { label: 'מחירון', href: '/pricing' },
   { label: 'הדפסות', href: '/prints' },
-  { label: 'בלוג', href: '/blog' },
-  { label: 'מה עיבוד עושה לתמונה', href: '/editing' },
   { label: 'גלריה', href: '/gallery' },
   { label: 'הסיפור שלי', href: '/about' },
   { label: 'בית', href: '/' },

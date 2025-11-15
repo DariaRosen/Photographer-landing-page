@@ -132,6 +132,7 @@
 .tabContent {
   padding: $spacing-xl $spacing-md;
   min-height: 300px;
+  animation: fadeIn 0.4s ease-in-out;
 
   @include breakpoint(lg) {
     padding: $spacing-2xl $spacing-2xl;
@@ -141,6 +142,27 @@
 .content {
   max-width: 800px;
   margin: 0 auto;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .paragraph {

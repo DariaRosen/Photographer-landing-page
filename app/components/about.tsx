@@ -42,10 +42,10 @@ interface Tab {
       'החזון שלי הוא ליצור עבורכם סיפור מלא, לא רק צילום.',
       'לכן כל סשן מתחיל עוד הרבה לפני שדרכתם בסטודיו:',
       '',
-      '✨ יחד אנחנו בונים קונספט מותאם לכם',
-      '✨ מתכננים בגדים, צבעים ורקעים',
-      '✨ בוחרים לוקיישנים בטבע או סטים מיוחדים בסטודיו בפורת',
-      '✨ משלבים אביזרים בטוב טעם שמחמיאים לסגנון המשפחתי שלכם',
+      '✓ יחד אנחנו בונים קונספט מותאם לכם',
+      '✓ מתכננים בגדים, צבעים ורקעים',
+      '✓ בוחרים לוקיישנים בטבע או סטים מיוחדים בסטודיו בפורת',
+      '✓ משלבים אביזרים בטוב טעם שמחמיאים לסגנון המשפחתי שלכם',
       '',
       'המטרה?',
       'להעניק לכם חוויה נינוחה, זורמת ומדויקת — ובעיקר תמונות שמגרמות לכם לעצור ולהרגיש.',
@@ -106,8 +106,19 @@ interface Tab {
 
 export const About = () => {
   const [activeTab, setActiveTab] = useState<string>(tabs[0].id)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   const activeTabContent = tabs.find((tab) => tab.id === activeTab)
+
+  const handleTabChange = (tabId: string) => {
+    if (tabId !== activeTab) {
+      setIsAnimating(true)
+      setTimeout(() => {
+        setActiveTab(tabId)
+        setIsAnimating(false)
+      }, 150)
+    }
+  }
 
   return (
     <Main>
@@ -120,7 +131,7 @@ export const About = () => {
               <button
                 key={tab.id}
                 className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabChange(tab.id)}
                 type="button"
               >
                 <img 
@@ -135,8 +146,8 @@ export const About = () => {
           </div>
 
           <div className={styles.tabContent}>
-            {activeTabContent && (
-              <div className={styles.content}>
+            {activeTabContent && !isAnimating && (
+              <div className={styles.content} key={activeTab}>
                 {activeTabContent.content.map((paragraph, index) => (
                   paragraph ? (
                     <p key={index} className={styles.paragraph}>
