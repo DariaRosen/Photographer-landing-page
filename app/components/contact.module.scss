@@ -1,0 +1,251 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.contact {
+  padding: $spacing-2xl $spacing-md;
+  max-width: 1400px;
+  margin: 0 auto;
+  direction: rtl; // Right-to-left for Hebrew
+
+  @include breakpoint(lg) {
+    padding: $spacing-2xl $spacing-lg;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: $spacing-md;
+  align-items: stretch;
+  max-height: 400px;
+
+  @include breakpoint(lg) {
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 1fr;
+    gap: $spacing-lg;
+    max-height: 400px;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+
+  @include breakpoint(lg) {
+    height: 100%;
+    max-height: 400px;
+    grid-row: 1;
+    grid-column: 1;
+  }
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  justify-content: center;
+  max-height: 400px;
+  overflow: hidden;
+
+  @include breakpoint(lg) {
+    grid-row: 1;
+    grid-column: 2;
+    padding: 0;
+    gap: 0;
+    max-height: 400px;
+  }
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.mainText {
+  font-family: $font-primary;
+  font-size: $fs-2xl;
+  font-weight: 400;
+  color: $text-dark;
+  margin-bottom: 0;
+  letter-spacing: 1px;
+  line-height: 1;
+
+  @include breakpoint(lg) {
+    font-size: $fs-4xl;
+    margin-bottom: 0;
+    line-height: 1;
+  }
+}
+
+.subText {
+  font-family: $font-primary;
+  font-size: $fs-xl;
+  font-weight: 400;
+  color: $text-dark;
+  margin-bottom: 0;
+  margin-top: 0;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+
+  @include breakpoint(lg) {
+    font-size: $fs-2xl;
+    margin-bottom: 0;
+    line-height: 1.1;
+  }
+}
+
+.description {
+  font-family: $font-primary;
+  font-size: $fs-base;
+  line-height: 1.2;
+  color: $text-light;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-weight: 400;
+
+  @include breakpoint(lg) {
+    font-size: $fs-lg;
+    line-height: 1.3;
+    margin-top: 0;
+  }
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  margin-top: $spacing-xs;
+
+  @include breakpoint(lg) {
+    gap: 0;
+    margin-top: $spacing-sm;
+  }
+}
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-top: $spacing-xs;
+  padding-top: $spacing-xs;
+  border-top: 1px solid $border-color;
+
+  @include breakpoint(lg) {
+    gap: $spacing-lg;
+    margin-top: $spacing-sm;
+    padding-top: $spacing-sm;
+  }
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: 0;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateX(-5px);
+  }
+
+  @include breakpoint(lg) {
+    gap: $spacing-md;
+    padding: 0;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  color: $text-dark;
+  flex-shrink: 0;
+
+  @include breakpoint(lg) {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.link {
+  font-family: $font-primary;
+  font-size: $fs-lg;
+  color: $text-dark;
+  text-decoration: none;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $primary-color;
+  }
+
+  @include breakpoint(lg) {
+    font-size: $fs-xl;
+  }
+}
+
+.location {
+  font-family: $font-primary;
+  font-size: $fs-lg;
+  color: $text-dark;
+
+  @include breakpoint(lg) {
+    font-size: $fs-xl;
+  }
+}
+
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: all $transition-base;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-2px) scale(1.1);
+  }
+
+  @include breakpoint(lg) {
+    width: 56px;
+    height: 56px;
+  }
+
+  // Facebook - blue
+  &:nth-child(1) {
+    color: #1877F2;
+  }
+
+  // Instagram - gradient (will use SVG fill colors)
+  &:nth-child(2) {
+    color: #E4405F;
+  }
+
+  // TikTok - black with colored accents
+  &:nth-child(3) {
+    color: #000000;
+  }
+}
+
+.socialIcon {
+  width: 28px;
+  height: 28px;
+
+  @include breakpoint(lg) {
+    width: 32px;
+    height: 32px;
+  }
+}
+
