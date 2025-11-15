@@ -118,7 +118,7 @@ export const Testimonials = () => {
         <h1 className={styles.title}>לקוחות ממליצים</h1>
 
         <div className={styles.carouselContainer}>
-          <div className={styles.carouselTrack}>
+          <div className={styles.cardsContainer}>
             <button
               className={styles.navButton}
               onClick={goToPrevious}
@@ -130,47 +130,45 @@ export const Testimonials = () => {
               </svg>
             </button>
 
-            <div className={styles.cardsContainer}>
-              {[0, 1, 2].map((position) => {
-                const testimonial = getTestimonialForPosition(position)
-                const isCenter = position === 1
-                
-                return (
-                  <div key={`${testimonial.id}-${position}-${currentIndex}`} className={styles.cardWrapper}>
-                    <div
-                      className={`${styles.testimonialCard} ${
-                        isCenter ? styles.cardCenter : position === 0 ? styles.cardLeft : styles.cardRight
-                      }`}
-                    >
-                      <div className={styles.imageWrapper}>
-                        <img
-                          src={testimonial.image}
-                          alt="Testimonial"
-                          className={styles.image}
-                        />
-                      </div>
-                      <div className={styles.content}>
-                        {testimonial.text.map((paragraph, index) => (
-                          <p key={index} className={styles.text}>
-                            {paragraph}
-                          </p>
-                        ))}
-                      </div>
+            {[0, 1, 2].map((position) => {
+              const testimonial = getTestimonialForPosition(position)
+              const isCenter = position === 1
+              
+              return (
+                <div key={`${testimonial.id}-${position}-${currentIndex}`} className={styles.cardWrapper}>
+                  <div
+                    className={`${styles.testimonialCard} ${
+                      isCenter ? styles.cardCenter : position === 0 ? styles.cardLeft : styles.cardRight
+                    }`}
+                  >
+                    <div className={styles.imageWrapper}>
+                      <img
+                        src={testimonial.image}
+                        alt="Testimonial"
+                        className={styles.image}
+                      />
                     </div>
-                    <div className={styles.heartContainer}>
-                      <div className={styles.heartCircle}>
-                        <img
-                          src="/pink-calligraphy-heart/bb10b0aa-4032-4feb-9f3b-1c48e55eb96f.jpg"
-                          alt="Heart"
-                          className={styles.heartIcon}
-                        />
-                      </div>
-                      <p className={styles.clientName}>{testimonial.clientName}</p>
+                    <div className={styles.content}>
+                      {testimonial.text.map((paragraph, index) => (
+                        <p key={index} className={styles.text}>
+                          {paragraph}
+                        </p>
+                      ))}
                     </div>
                   </div>
-                )
-              })}
-            </div>
+                  <div className={styles.heartContainer}>
+                    <div className={styles.heartCircle}>
+                      <img
+                        src="/pink-calligraphy-heart/bb10b0aa-4032-4feb-9f3b-1c48e55eb96f.jpg"
+                        alt="Heart"
+                        className={styles.heartIcon}
+                      />
+                    </div>
+                    <p className={styles.clientName}>{testimonial.clientName}</p>
+                  </div>
+                </div>
+              )
+            })}
 
             <button
               className={styles.navButton}

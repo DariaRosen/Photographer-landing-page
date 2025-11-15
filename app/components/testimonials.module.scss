@@ -33,51 +33,47 @@
   position: relative;
   width: 100%;
   padding: $spacing-lg 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
 }
 
-.carouselTrack {
+.cardsContainer {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr 1fr 1fr auto;
   gap: $spacing-md;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   align-items: start;
 
+  @include breakpoint(md) {
+    grid-template-columns: auto repeat(2, 1fr) auto;
+  }
+
   @include breakpoint(lg) {
+    grid-template-columns: auto repeat(3, 1fr) auto;
     gap: $spacing-lg;
   }
 
   > *:first-child {
     grid-column: 1;
+    align-self: center;
   }
 
   > *:last-child {
-    grid-column: 3;
+    grid-column: -1;
+    align-self: center;
   }
 }
 
-.cardsContainer {
-  grid-column: 2;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: $spacing-md;
-
-  @include breakpoint(md) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include breakpoint(lg) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: $spacing-lg;
-  }
-}
 
 .cardWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: $spacing-md;
+  grid-column: span 1;
 }
 
 .testimonialCard {
