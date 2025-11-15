@@ -53,32 +53,53 @@
   flex: 1;
   min-width: 50%;
   padding: $spacing-md $spacing-sm;
-  font-family: $font-secondary;
-  font-size: $fs-base;
+  font-family: $font-primary;
+  font-size: $fs-sm;
   font-weight: 400;
   color: $text-light;
   background-color: transparent;
   border: none;
-  border-bottom: 3px solid transparent;
+  border-bottom: 2px solid transparent;
   cursor: pointer;
   transition: all $transition-base;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 100%;
+    background-color: transparent;
+    transition: background-color $transition-base;
+  }
 
   @include breakpoint(lg) {
     flex: 1;
     min-width: auto;
     padding: $spacing-lg $spacing-md;
-    font-size: $fs-lg;
-    letter-spacing: 1px;
+    font-size: $fs-base;
+    letter-spacing: 0.5px;
+    gap: $spacing-sm;
   }
 
   &:hover {
     color: $text-dark;
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: rgba(0, 0, 0, 0.02);
+
+    .tabIcon {
+      opacity: 1;
+    }
   }
 
   &.tabActive {
@@ -86,7 +107,29 @@
     border-bottom-color: $primary-color;
     font-weight: 500;
     background-color: $secondary-color;
-    letter-spacing: 1px;
+
+    &::before {
+      background-color: $primary-color;
+    }
+
+    .tabIcon {
+      opacity: 1;
+      filter: brightness(0);
+    }
+  }
+}
+
+.tabIcon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.6;
+  transition: opacity $transition-base, filter $transition-base;
+  flex-shrink: 0;
+
+  @include breakpoint(lg) {
+    width: 20px;
+    height: 20px;
   }
 }
 
