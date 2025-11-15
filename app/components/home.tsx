@@ -1,5 +1,5 @@
 import styles from './home.module.scss'
-import { Main } from '@/components/Main/main'
+import { Main } from '@/components/Main/Main'
 
 export const Home = () => {
   return (
