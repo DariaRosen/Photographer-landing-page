@@ -157,7 +157,6 @@ export const Carousel = ({ images, autoPlayInterval = 4000 }: CarouselProps) => 
         <button
           className={styles.carouselButton}
           onClick={goToPrevious}
-          disabled={currentIndex === 0}
           aria-label="Previous image"
           type="button"
         >
@@ -183,7 +182,6 @@ export const Carousel = ({ images, autoPlayInterval = 4000 }: CarouselProps) => 
         <button
           className={`${styles.carouselButton} ${styles.carouselButtonRight}`}
           onClick={goToNext}
-          disabled={currentIndex >= images.length - VISIBLE}
           aria-label="Next image"
           type="button"
         >
