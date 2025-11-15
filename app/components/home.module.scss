@@ -1,0 +1,28 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.home {
+  padding: $spacing-2xl $spacing-md;
+  text-align: center;
+}
+
+.title {
+  font-family: $font-secondary;
+  font-size: $fs-5xl;
+  font-weight: 700;
+  margin-bottom: $spacing-lg;
+  color: $text-dark;
+
+  @include breakpoint(lg) {
+    font-size: 4rem;
+  }
+}
+
+.description {
+  font-size: $fs-xl;
+  color: $text-light;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
