@@ -61,8 +61,8 @@ export const Header = ({ navigation = defaultNavigation }: HeaderProps) => {
               height="32"
             />
           </a>
-          <a href="tel:0586645622" className={styles.phoneNumber}>
-            058-664-5622
+          <a href="tel:0542281004" className={styles.phoneNumber}>
+            054-228-1004
           </a>
         </div>
 

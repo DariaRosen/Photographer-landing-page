@@ -111,13 +111,53 @@
   }
 }
 
+/* ------------------------------------------------------ */
+/*   BEAUTIFUL ACTIVE LINK – Bold + Underline Animation    */
+/* ------------------------------------------------------ */
+
 .navItem {
   font-size: 1.4rem;
   color: $text-dark;
+  position: relative;
+  display: inline-block;
 
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+
+  /* underline animation line (hidden by default) */
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: $primary-color;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  /* Hover effect */
   &:hover {
     color: $primary-color;
   }
+
+  &:hover::after {
+    width: 100%;
+    left: 0;
+  }
+}
+
+/* Active page style */
+.navItem.active {
+  color: $primary-color;
+  font-weight: 700;
+}
+
+.navItem.active::after {
+  width: 100%;
+  left: 0;
 }
 
 /* MOBILE MENU BUTTON */
