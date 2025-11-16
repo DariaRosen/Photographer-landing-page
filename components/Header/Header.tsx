@@ -45,52 +45,55 @@ export const Header = ({ navigation = defaultNavigation }: HeaderProps) => {
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
-        {/* Left Section - Contacts */}
+
+        {/* Left - Contacts */}
         <div className={styles.contacts}>
-          <a href="https://wa.me/972586645622" target="_blank" rel="noopener noreferrer" className={styles.contactLink} aria-label="WhatsApp">
-            <img src="/512px-WhatsApp.svg.webp" alt="WhatsApp" className={styles.whatsappIcon} width="20" height="20" />
+          <a
+            href="https://wa.me/972586645622"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.contactLink}
+          >
+            <img
+              src="/512px-WhatsApp.svg.webp"
+              alt="WhatsApp"
+              className={styles.whatsappIcon}
+              width="32"
+              height="32"
+            />
           </a>
-          <a href="tel:0586645622" className={styles.phoneNumber}>058-664-5622</a>
+          <a href="tel:0586645622" className={styles.phoneNumber}>
+            058-664-5622
+          </a>
         </div>
 
-        {/* Middle Section - Navigation Links */}
+        {/* Center - Navigation */}
         <nav className={styles.nav}>
           {navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`${styles.navItem} ${
-                pathname === item.href ? styles.active : ''
-              }`}
+              className={`${styles.navItem} ${pathname === item.href ? styles.active : ''}`}
+              onClick={handleNavClick}
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        {/* Right Section - Logo */}
+        {/* Right - Logo */}
         <Link href="/" className={styles.logo}>
-          <img 
-            src="/logo.jpg" 
-            alt="" 
+          <img
+            src="/logo.jpg"
+            alt="Logo"
             className={styles.logoImage}
-            onError={(e) => {
-              console.error('Logo failed to load from /logo.jpg');
-              const img = e.target as HTMLImageElement;
-              img.style.display = 'none';
-              img.src = '/logo.jpg';
-            }}
-            onLoad={() => console.log('Logo loaded successfully from /logo.jpg')}
           />
         </Link>
 
+        {/* Mobile Button */}
         <button
-          className={`${styles.mobileMenuButton} ${
-            isMobileMenuOpen ? styles.open : ''
-          }`}
+          className={`${styles.mobileMenuButton} ${isMobileMenuOpen ? styles.open : ''}`}
           onClick={handleMobileMenuToggle}
-          aria-label="Toggle mobile menu"
-          aria-expanded={isMobileMenuOpen}
         >
           <span></span>
           <span></span>
@@ -98,11 +101,8 @@ export const Header = ({ navigation = defaultNavigation }: HeaderProps) => {
         </button>
       </div>
 
-      <div
-        className={`${styles.mobileMenu} ${
-          isMobileMenuOpen ? styles.open : ''
-        }`}
-      >
+      {/* Mobile Menu */}
+      <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.open : ''}`}>
         <nav className={styles.mobileNav}>
           {navigation.map((item) => (
             <Link
