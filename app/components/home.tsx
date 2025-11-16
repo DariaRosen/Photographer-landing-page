@@ -19,7 +19,7 @@ export const Home = () => {
       <div className={styles.home}>
         <div className={styles.contentSection}>
           <p className={styles.description} dir="rtl">
-            »הרגעים הקטנים עם המשפחה היום הם פרקי הנוסטלגיה של העתיד«
+            «הרגעים הקטנים עם המשפחה היום הם פרקי הנוסטלגיה של העתיד»
           </p>
         </div>
         <div className={styles.carouselSection}>
