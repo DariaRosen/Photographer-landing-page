@@ -46,6 +46,7 @@
   margin: 0 auto;
   line-height: 1.6;
   letter-spacing: 0.5px;
+  padding-top: 140px;
 
   @include breakpoint(lg) {
     font-size: $fs-4xl;

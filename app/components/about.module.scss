@@ -2,7 +2,7 @@
 @import '../../styles/mixins';
 
 .about {
-  padding: $spacing-2xl $spacing-md;
+  padding: 0 $spacing-md;
   max-width: 1200px;
   margin: 0 auto;
   direction: rtl; // Right-to-left for Hebrew

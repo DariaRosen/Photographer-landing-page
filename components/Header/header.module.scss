@@ -100,9 +100,12 @@
   @include breakpoint(md) {
     display: flex;
     flex: 2;
-    justify-content: center; /* CENTER LINKS */
+    justify-content: center;
     gap: $spacing-lg;
     flex-wrap: nowrap;
+
+    direction: rtl; // Text flows RTL
+    flex-direction: row-reverse; // Children appear right → left
   }
 }
 
