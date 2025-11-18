@@ -4,9 +4,9 @@
 
 Boutique-grade landing page crafted for a luxury photographer brand. Built with **Next.js 15 App Router**, **React 19**, **TypeScript**, and a custom **Autumn Harvest** palette to celebrate warm storytelling visuals.
 
-![Hero Screenshot](public/gallery/photo1.PNG)
+![Hero Screenshot](public/gallery/image.png)
 
-🔗 **Live Demo:** https://photographer-landing-page.vercel.app/  
+🔗 **Live Demo:** https://photographer-landing-page-eight.vercel.app/  
 💻 **Repository:** https://github.com/DariaRosen/Photographer-landing-page
 
 </div>
