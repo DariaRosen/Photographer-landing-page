@@ -44,17 +44,16 @@
   @include breakpoint(lg) {
     grid-template-columns: repeat(5, 1fr);
     gap: $spacing-lg;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
   }
 }
 
 .printBox {
-  background-color: $secondary-color;
+  background-color: $bg-off-white;
   color: $text-dark;
   border: 1px solid $border-color;
-  border-radius: 50%;
-  padding: $spacing-lg;
+  border-radius: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,6 +63,8 @@
   transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
   cursor: pointer;
   aspect-ratio: 1;
+  padding-left: 15px;
+  padding-right: 15px;
 
   &:hover {
     transform: translateY(-4px) scale(1.05);
@@ -72,14 +73,13 @@
   }
 
   @include breakpoint(md) {
-    width: 140px;
-    height: 140px;
+    width: 100px;
+    height: 100px;
   }
 
   @include breakpoint(lg) {
-    width: 180px;
-    height: 180px;
-    padding: $spacing-xl;
+    width: 140px;
+    height: 100px;
   }
 }
 

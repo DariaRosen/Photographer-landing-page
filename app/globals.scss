@@ -27,13 +27,13 @@ section {
   scroll-margin-top: 120px;
   background-color: $secondary-color;
   border-radius: 32px;
-  padding: $spacing-2xl $spacing-md;
+  padding: 0 $spacing-md;
   margin: 0 auto $spacing-2xl;
   max-width: 1400px;
   box-shadow: 0 25px 60px rgba(125, 82, 52, 0.08);
 
   @include breakpoint(lg) {
-    padding: $spacing-2xl;
+    padding: 0;
   }
 }
 
