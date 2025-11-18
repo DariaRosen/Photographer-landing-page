@@ -1,95 +1,33 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-.carousel {
+.swiperWrapper {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  position: relative;
-  padding: 0 0;
+  padding: $spacing-lg 0;
 }
 
-.carouselContainer {
-  position: relative;
+.swiper {
   width: 100%;
-  height: 450px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @include breakpoint(lg) {
-    height: 400px;
-  }
 }
 
-.carouselSlide {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  will-change: transform, opacity;
-
-  /* 👇 Smooth position + scale animation */
-  transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
-    opacity 0.9s ease;
-}
-
-.carouselImage {
+.swiperSlide {
   width: 320px;
-  height: 450px;
-  object-fit: cover;
-  object-position: center;
-  border: 10px solid $secondary-color;
-  border-bottom-width: 20px;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1), 0 10px 25px rgba(0, 0, 0, 0.2);
-
-  transition: box-shadow 0.4s ease;
+  height: 420px;
+  border-radius: 18px;
+  border: 10px solid #fff;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 
   @include breakpoint(lg) {
-    width: 450px;
-    height: 330px;
-  }
-}
-
-.carouselSlide:hover .carouselImage {
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12), 0 12px 32px rgba(0, 0, 0, 0.3);
-}
-
-/* Buttons */
-.carouselButton {
-  @include button-reset;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: $spacing-md;
-
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  border: 1px solid $border-color;
-  background: rgba(255, 255, 255, 0.9);
-  cursor: pointer;
-  font-size: 50px;
-  line-height: 45px;
-  color: $primary-color;
-
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-50%) scale(1.05);
-    background-color: $secondary-color;
-    border-color: $primary-color;
+    width: 380px;
+    height: 320px;
   }
 
-  @include breakpoint(lg) {
-    left: $spacing-lg;
-  }
-}
-
-.carouselButtonRight {
-  left: auto;
-  right: $spacing-md;
-
-  @include breakpoint(lg) {
-    right: $spacing-lg;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }

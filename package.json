@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "embla-carousel-react": "^8.6.0",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "@supabase/supabase-js": "^2.39.0"
+    "swiper": "^12.0.3"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -22,4 +24,3 @@
     "typescript": "^5"
   }
 }
-
